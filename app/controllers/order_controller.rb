@@ -59,7 +59,11 @@ class OrderController < ApplicationController
   end
 
   if @order.closed == true
-    return render:template => "order/pay_paypal", :layout => false
+    if params["ajax"] == "1"
+      return render:template => "order/pay_paypal", :layout => false
+    else
+      return render:template => "order/pay_paypal"
+    end
   end
   
     if params["ajax"] == "1"
