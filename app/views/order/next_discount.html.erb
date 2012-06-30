@@ -1,6 +1,6 @@
 <% @discount_id = @order.get_next_discount %>
 <% if @discount_id[:next] == :max %>
-	Ya has conseguido el mayor descuento, de un <b><%= (discount*100).round(2) %>%!</b>
+	Ya has conseguido el mayor descuento, de un <b><%= (@order.offer.get_discounts.last[:percentage]*100).round(2) %>%!</b>
 <% else %>
 	<h3>Siguiente descuento:</h3>
 	Para conseguir un <b><%= (@discount_id[:next][:percentage]*100) %>%</b> de descuento:<ul>
