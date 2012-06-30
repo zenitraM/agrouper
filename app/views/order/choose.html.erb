@@ -1,1 +1,4 @@
 <h1>Haz tu pedido, <%= User.find(session[:user_id]).username %></h1>
+<% @order.offer.products.each do |product| %>
+<p><%= product.title %></p> <%= url_for :action => :add, :id => @order.object_id, :product_name => product.object_id, :quantity => 1, :only_path => false %>
+<% end %>
