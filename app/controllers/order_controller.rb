@@ -5,7 +5,7 @@ class OrderController < ApplicationController
 
   	order = offer.orders.new
   	order.save
-  	redirect_to :action => :control, :id => order.object_id
+  	redirect_to :action => :control, :id => order.id
   end
 
   def join
