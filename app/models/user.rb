@@ -6,4 +6,7 @@ class User
 
   field :username
  
+  def get_total
+  	self.items.to_a.sum {|u| u.get_total }
+  end
  end

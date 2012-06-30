@@ -1,3 +1,11 @@
 <h1>Order control</h1>
 <p>Order ID: <%= @order.id %></p>
+<ul>
+<% @order.users.each { |u| %>
+	<li><b><%= u.username %></b>
+		<ul><li>aa</li></ul>
+	</li>
+<% } %>
+
+<p>Order total: <%= @order.get_total %></p>
 QR Code: <img src="http://chart.apis.google.com/chart?cht=qr&chs=300x300&chl=<%= url_for :action => :join, :id => @order.id, :only_path => false %>">
