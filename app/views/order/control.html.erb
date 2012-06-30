@@ -2,8 +2,11 @@
 <p>Order ID: <%= @order.id %></p>
 <ul>
 <% @order.users.each { |u| %>
-	<li><b><%= u.username %></b>
-		<ul><li>aa</li></ul>
+	<li><b><%= u.username %>: <%= u.get_total %>€</b>
+		<ul>
+			<% u.items.each { |i|%> 
+				<li><%= i.product.title %> - <%= i.product.price %>€ * <%= i.quantity %> = <%= i.get_total %>€</li>
+			<% }%></ul>
 	</li>
 <% } %>
 
