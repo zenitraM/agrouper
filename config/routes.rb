@@ -1,4 +1,6 @@
 Grouponer::Application.routes.draw do
+  get "offer/list"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
