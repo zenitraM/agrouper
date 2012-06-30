@@ -1,7 +1,28 @@
-<h1>Offer#list</h1>
+<div class="container">
+	<header id="title">
+		<h1>Agrouper</h1>
+	</header>
+	<section id="offers">
+		<% @offers.each_with_index { |offer, index| %>
 
-<ul>
-<% @offers.each { |offer| %>
-	<li><%= offer.title %></li>
-<% } %>
-</ul>
+			<% if index%2 == 0 %>
+
+				<div class="row show-grid">
+
+			<% end %>
+
+			<div class="span6 well">
+
+				<%= offer.title %>
+
+			</div>
+
+			<% if index%2 != 0 %>
+
+				</div>
+
+			<% end }%>
+
+	</section>
+	
+</div>
