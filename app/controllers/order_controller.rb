@@ -29,14 +29,28 @@ class OrderController < ApplicationController
   def control
   	order_id = params[:id]
   	@order = Order.find(order_id)
-  	
+  end
+
+  def ban_user
+  	order_id = params[:orderid]
+  	user_id = params[:userid]
+  	@user = User.find(user_id)
+  	@user.delete
+
+  	redirect_to :action => :control, :id => @order.id
+
+
   end
 
   def choose
 	order_id = params[:id]
 	@order = Order.find(order_id)
 	@user = User.find(session[:user_id])
-
+  if params["ajax"] == "1"
+    return render :layout => false
+  else
+    render
+  end
   end
 
   def add
