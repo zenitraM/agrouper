@@ -17,6 +17,9 @@ Grouponer::Application.routes.draw do
   get "order/updated_list/:id" => "order#updated_list"
 
   get "user/ban/:orderid/:userid" => "order#ban_user"
+
+  get 'order/invite/:id' => "order#invite"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

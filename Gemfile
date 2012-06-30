@@ -39,3 +39,4 @@ gem 'bson_ext'
 
 gem "twitter-bootstrap-rails"
 #https://github.com/seyhunak/twitter-bootstrap-rails/
+gem "mailjet"

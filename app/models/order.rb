@@ -7,6 +7,7 @@ class Order
   has_many :users
 
 
+
   def get_total
   	self.users.to_a.sum {|u| u.get_total }
   end
@@ -20,7 +21,6 @@ class Order
   	 	end 
   	end
   end
-
 
 
   def calculate_order_discount
@@ -37,6 +37,7 @@ class Order
   	end
   	discount
   end
+
 
   def get_next_discount
   	discounts = self.offer.get_discounts

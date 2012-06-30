@@ -42,6 +42,12 @@ class OrderController < ApplicationController
 
   end
 
+
+  def invite
+    InviteMailer.invite_email(params[:mail],params[:id]).deliver
+    return ""
+  end
+
   def choose
 	order_id = params[:id]
 	@order = Order.find(order_id)
