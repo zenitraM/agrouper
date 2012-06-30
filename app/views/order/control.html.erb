@@ -10,7 +10,7 @@
 				<img src="http://chart.apis.google.com/chart?cht=qr&chs=300x300&chl=<%= url_for :action => :join, :id => @order.id, :only_path => false %>"><br>
 				<div class="friendly-url">
 					<div class="well">
-						http://www.agrouper.com/hola
+						<%= url_for :action => :join, :id => @order.id, :only_path => false %>
 					</div>
 				</div>
 			</div>

@@ -1,5 +1,6 @@
 Grouponer::Application.routes.draw do
 
+  get '/' => "offer#list"
   match "order/new/:id" => "order#new"
 
   get "order/join/:id" => "order#join"
