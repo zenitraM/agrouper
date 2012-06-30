@@ -1,4 +1,13 @@
 Grouponer::Application.routes.draw do
+
+  match "order/new/:id" => "order#new"
+
+  get "order/join/:id" => "order#join"
+
+  get "order/control/:id" => "order#control"
+
+  get "order/choose/:id" => "order#choose"
+
   get "offer/list"
 
   # The priority is based upon order of creation:
