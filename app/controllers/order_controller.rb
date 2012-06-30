@@ -73,7 +73,7 @@ class OrderController < ApplicationController
   def checkout
     order_id = params[:id]
     @order = Order.find(order_id)
-    #@order.closed = true
+    @order.closed = true
     @order.save
   end
 

@@ -39,7 +39,7 @@
 				</div>
 				<div class="span3 pagination-right">
 					<div class="btn-group" style="float:right;">
-						<a class="btn btn-success btn-large" href="#">Terminar pedido</a>
+						<a class="btn btn-success btn-large" href="<%= url_for :controller => :order, :action => :checkout, :id => @order.id %>">Terminar pedido</a>
 						<a class="btn btn-success btn-large" id="final-price"> <%= @order.get_total %> €</a>
 					</div>
 					<div class="clear"></div>
