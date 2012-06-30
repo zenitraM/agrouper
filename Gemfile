@@ -36,3 +36,6 @@ end
 
 gem 'mongoid'
 gem 'bson_ext'
+
+gem "twitter-bootstrap-rails"
+#https://github.com/seyhunak/twitter-bootstrap-rails/
