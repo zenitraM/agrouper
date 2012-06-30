@@ -45,7 +45,7 @@ class OrderController < ApplicationController
 
   def invite
     InviteMailer.invite_email(params[:mail],params[:id]).deliver
-    return ""
+    render :text => ""
   end
 
   def choose
@@ -104,8 +104,14 @@ class OrderController < ApplicationController
     order_id = params[:id]
     @order = Order.find(order_id)
     price = @order.get_total
-    percentage = @order.calculate_order_discount*100 / @order.offer.get_discounts.last[:lower_limit] *100
+    percentage = @order.calculate_order_discount*100 / @order.offer.get_discounts.last[:percentage] 
     render :text => ( price.to_s + "/" + percentage.to_s )
+  end
+
+  def next_discount
+    order_id = params[:id]
+    @order = Order.find(order_id)
+    render :layout => :false
   end
 
 end
