@@ -16,18 +16,40 @@
 			</div>
 		</div>
 		<div class="span8">
-			<div class="well">
-				<% @order.users.each { |u| %>
-					<li><b><%= u.username %>: <%= u.get_total %>€</b>
-						<ul>
-							<% u.items.each { |i|%> 
-								<li><%= i.product.title %> - <%= i.product.price %>€ * <%= i.quantity %> = <%= i.get_total %>€</li>
-							<% }%></ul>
-					</li>
-				<% } %>
-				<p>Order total: <%= @order.get_total %></p>
-				<p>Descuento: <%= @order.calculate_order_discount * 100 %>%</p>
+			<div class="well" id="updated_list">
+				<%= render :template => "order/updated_list" %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="span5">
+				<div class="progress progress-striped progress-success active">
+			    	<div class="bar" style="width: <%= @order.calculate_order_discount*100 / @order.offer.get_discounts.last[:lower_limit] *100 %>%;"></div>
+			    </div>
+			</div>
+			<div class="span3 pagination-right">
+				<div class="btn-group" style="float:right;">
+					<a class="btn btn-success btn-large" href="#">Terminar pedido</a>
+					<a class="btn btn-success btn-large"> <%= @order.get_total %> €</a>
+				</div>
+				<div class="clear"></div>
 			</div>
 		</div>
 	</div>
 </section>
+
+<script>
+
+function updateList(){
+
+	$.ajax({
+  		url: "<%= url_for :controller => :order, :action => :updated_list, :id => @order.id %>",
+		}).done(function(a) { 
+  			$("#updated_list").html(a);
+  			setTimeout(updateList,2000);
+		});
+
+}
+
+setTimeout(updateList,2000);
+
+</script>

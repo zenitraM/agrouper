@@ -83,4 +83,11 @@ class OrderController < ApplicationController
   	redirect_to :action => :choose, :id => order.id
   end
 
+  def updated_list
+    order_id = params[:id]
+    @order = Order.find(order_id)
+    render :layout => false
+  end
+
+
 end
