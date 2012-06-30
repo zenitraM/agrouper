@@ -8,6 +8,8 @@ Grouponer::Application.routes.draw do
 
   get "order/choose/:id" => "order#choose"
 
+  get "order/add/:id/:product_name/:quantity" => "order#add"
+
   get "offer/list"
 
   # The priority is based upon order of creation:
