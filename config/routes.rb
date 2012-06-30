@@ -3,6 +3,7 @@ Grouponer::Application.routes.draw do
   match "order/new/:id" => "order#new"
 
   get "order/join/:id" => "order#join"
+  post "order/join/:id" => "order#join"
 
   get "order/control/:id" => "order#control"
 

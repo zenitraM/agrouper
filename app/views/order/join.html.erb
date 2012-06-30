@@ -1,2 +1,6 @@
-<h1>Order#join</h1>
-<p>Find me in app/views/order/join.html.erb</p>
+<h1>Únete al pedido!</h1>
+<p>Pon tu nombre o nick:</p>
+<%= form_for :user do |f| %>
+<%= f.text_field :username %><br />
+  <%= f.submit "Entrar!" %>
+<% end %>
