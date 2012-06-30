@@ -9,7 +9,7 @@
 					<b><%= u.get_total %> €</b>
 				</div>
 				<div style="float:left; width: 10%">
-					<a class="btn btn-warning"> x </a>
+					<a class="btn btn-warning" href="<%= url_for :controller => :order, :action => :ban_user, :orderid => @order.id, :userid => u.id %>" > x </a>
 				</div>
 				<div class="clear"></div>
 				<ul>

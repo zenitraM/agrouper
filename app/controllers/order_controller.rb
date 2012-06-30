@@ -37,7 +37,7 @@ class OrderController < ApplicationController
   	@user = User.find(user_id)
   	@user.delete
 
-  	redirect_to :action => :control, :id => @order.id
+  	redirect_to :action => :control, :id => order_id
 
 
   end
@@ -45,7 +45,12 @@ class OrderController < ApplicationController
   def choose
 	order_id = params[:id]
 	@order = Order.find(order_id)
-	@user = User.find(session[:user_id])
+  begin
+	 @user = User.find(session[:user_id])
+  rescue
+    params[:id] = nil
+    return redirect_to '/'
+  end
   if params["ajax"] == "1"
     return render :layout => false
   else
