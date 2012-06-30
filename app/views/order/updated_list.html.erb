@@ -32,6 +32,14 @@
 						</li>
 						<hr>
 					<% }%>
+					<li>
+							<div style="width: 90%; float: left;">
+								<b>Descuento</b>
+							</div>
+							<div style="width: 10%; float: left;">
+								<b>-<%= (u.get_total * (@order.calculate_order_discount)).round(2) %>€</b>
+							</div>
+					</li>
 				</ul>
 			</div>
 		</li>

@@ -8,8 +8,8 @@ class Offer
   has_many :orders
 
   def get_discounts
-  	[{:users_required => 1, :percentage => 0.1, :lower_limit => 20},
-  	{:users_required => 2, :percentage => 0.2, :lower_limit => 30},
-  	{:users_required => 3, :percentage => 0.3, :lower_limit => 50}]
+  	[{:users_required => 2, :percentage => 0.1, :lower_limit => 20},
+  	{:users_required => 4, :percentage => 0.2, :lower_limit => 50},
+  	{:users_required => 8, :percentage => 0.3, :lower_limit => 75}]
   end
 end
