@@ -13,14 +13,29 @@
 						<%= url_for :action => :join, :id => @order.id, :only_path => false %>
 					</div>
 				</div>
+				<div class="">
+					<div class="well">
+						<form id="mail-invite-form" onSubmit="sendMail();return false;">
+							Invita por email: <input type="text" id="mail-field"></input>
+						</form>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="span8">
 			<div class="row">
 				<div class="span5">
-					<div class="progress progress-striped progress-success active">
-				    	<div class="bar" id="discount-bar" style="width: <%= @order.calculate_order_discount*100 / @order.offer.get_discounts.last[:lower_limit] *100 %>%;"></div>
+					<div style="float:left">0%&nbsp;</div>
+					<div class="progress progress-striped progress-success active" style="width:80%; float:left;">
+				    	<div class="bar" id="discount-bar" style="width: <%= @order.calculate_order_discount*100 / @order.offer.get_discounts.last[:percentage] %>%;"></div>
 				    </div>
+				    <div style="float:left">
+				    	&nbsp;<%= @order.offer.get_discounts.last[:percentage]*100 %>%
+				    </div>
+				    <div class="clear"></div>
+				    <div id="next-discount">
+				    	<%= render :template => "order/next_discount" %>
+					</div>
 				</div>
 				<div class="span3 pagination-right">
 					<div class="btn-group" style="float:right;">
@@ -70,7 +85,39 @@ function updatePrice(){
 
 }
 
+function updateDiscount(){
+
+	$.ajax({
+  		url: "<%= url_for :controller => :order, :action => :next_discount, :id => @order.id %>",
+		}).done(function(a) { 
+  			$("#next-discount").html(a);
+  			setTimeout(updateDiscount,2000);
+		});
+}
+
+function sendMail(){
+
+	var parameters = "mail=" + $("#mail-field").val() ;
+
+	$.ajax({
+		url: "<%= url_for :controller => :order, :action => :invite, :id => @order.id %>",
+		data: parameters 
+	})
+
+	$("#mail-field").val("mensaje enviado");
+
+	setTimeout(resetMail,500);
+
+	return false;
+}
+
+function resetMail(){
+
+	$("#mail-field").val("");
+}
+
 setTimeout(updateList,2000);
 setTimeout(updatePrice,2000);
+setTimeout(updateDiscount,2000);
 
 </script>
