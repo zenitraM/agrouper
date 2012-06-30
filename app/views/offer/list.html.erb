@@ -1,27 +1,27 @@
+<header id="title">
+	<h1>Agrouper</h1>
+</header>
+<section id="offers">
+	<% @offers.each_with_index { |offer, index| %>
 
-<div class="container">
-	<header id="title">
-		<h1>Agrouper</h1>
-	</header>
-	<section id="offers">
-		<% @offers.each_with_index { |offer, index| %>
+		<% if index%2 == 0 %>
 
-			<% if index%2 == 0 %>
+			<div class="row">
 
-				<div class="row show-grid">
+		<% end %>
 
-			<% end %>
+		<div class="span6">
 
-			<div class="span6 well">
+			<div class="well">
 
 				<div class="row">
 
-					<div class="span5">
+					<div class="offer-title-container pagination-left">
 
 						<h2 class="offer-title"><%= offer.title %></h2>
 					</div>
 
-					<div class="span1">
+					<div class="offer-btn-container pagination-right">
 
 						<a class="btn btn-primary btn-large" href="<%= url_for :controller => :order, :action => :new, :id => offer.id %>">
 
@@ -31,17 +31,18 @@
 
 					</div>
 
+					<div class="clear"></div>
+
 				</div>
 
 			</div>
 
-			<% if index%2 != 0 %>
+		</div>
 
-				</div>
+		<% if index%2 != 0 %>
 
-			<% end }%>
+			</div>
 
-	</section>
-	
-</div>
+		<% end }%>
 
+</section>
