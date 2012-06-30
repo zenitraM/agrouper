@@ -100,5 +100,12 @@ class OrderController < ApplicationController
     render :layout => false
   end
 
+  def updated_price
+    order_id = params[:id]
+    @order = Order.find(order_id)
+    price = @order.get_total
+    percentage = @order.calculate_order_discount*100 / @order.offer.get_discounts.last[:lower_limit] *100
+    render :text => ( price.to_s + "/" + percentage.to_s )
+  end
 
 end

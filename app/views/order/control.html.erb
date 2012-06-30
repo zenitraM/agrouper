@@ -16,22 +16,26 @@
 			</div>
 		</div>
 		<div class="span8">
-			<div class="well" id="updated_list">
-				<%= render :template => "order/updated_list" %>
-			</div>
-		</div>
-		<div class="row">
-			<div class="span5">
-				<div class="progress progress-striped progress-success active">
-			    	<div class="bar" style="width: <%= @order.calculate_order_discount*100 / @order.offer.get_discounts.last[:lower_limit] *100 %>%;"></div>
-			    </div>
-			</div>
-			<div class="span3 pagination-right">
-				<div class="btn-group" style="float:right;">
-					<a class="btn btn-success btn-large" href="#">Terminar pedido</a>
-					<a class="btn btn-success btn-large"> <%= @order.get_total %> €</a>
+			<div class="row">
+				<div class="span5">
+					<div class="progress progress-striped progress-success active">
+				    	<div class="bar" id="discount-bar" style="width: <%= @order.calculate_order_discount*100 / @order.offer.get_discounts.last[:lower_limit] *100 %>%;"></div>
+				    </div>
 				</div>
-				<div class="clear"></div>
+				<div class="span3 pagination-right">
+					<div class="btn-group" style="float:right;">
+						<a class="btn btn-success btn-large" href="#">Terminar pedido</a>
+						<a class="btn btn-success btn-large" id="final-price"> <%= @order.get_total %> €</a>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<div class="row" style="margin-top: 20px">
+				<div class="span8">
+					<div class="well" id="updated_list">
+						<%= render :template => "order/updated_list" %>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -50,6 +54,23 @@ function updateList(){
 
 }
 
+function updatePrice(){
+
+	$.ajax({
+  		url: "<%= url_for :controller => :order, :action => :updated_price, :id => @order.id %>",
+		}).done(function(a) {
+			var price = a.split("/")[0] + " €";
+			var percentage = a.split("/")[1] + "%";
+			$("#final-price").html(price);
+			$("#discount-bar").animate({
+				width: percentage
+			})
+  			setTimeout(updatePrice,2000);
+		});
+
+}
+
 setTimeout(updateList,2000);
+setTimeout(updatePrice,2000);
 
 </script>
