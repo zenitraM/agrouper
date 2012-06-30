@@ -23,7 +23,7 @@
 		<div class="row">
 			<div class="span5">
 				<div class="progress progress-striped progress-success active">
-			    	<div class="bar" style="width: <%= @order.calculate_order_discount*100 / @order.offer.get_discounts.last[:lower_limit] %>%;"></div>
+			    	<div class="bar" style="width: <%= @order.calculate_order_discount*100 / @order.offer.get_discounts.last[:lower_limit] *100 %>%;"></div>
 			    </div>
 			</div>
 			<div class="span3 pagination-right">
