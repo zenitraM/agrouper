@@ -124,7 +124,7 @@ class OrderController < ApplicationController
   def next_discount
     order_id = params[:id]
     @order = Order.find(order_id)
-    render :layout => :false
+    render :layout => false
   end
 
 end
