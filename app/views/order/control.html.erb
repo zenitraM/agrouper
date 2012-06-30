@@ -62,6 +62,7 @@ function updateList(){
 
 	$.ajax({
   		url: "<%= url_for :controller => :order, :action => :updated_list, :id => @order.id %>",
+  		error: function(){ setTimeout(updateList,2000); }
 		}).done(function(a) { 
   			$("#updated_list").html(a);
   			setTimeout(updateList,2000);
@@ -73,6 +74,7 @@ function updatePrice(){
 
 	$.ajax({
   		url: "<%= url_for :controller => :order, :action => :updated_price, :id => @order.id %>",
+  		error: function(){setTimeout(updatePrice,2000);}
 		}).done(function(a) {
 			var price = a.split("/")[0] + " €";
 			var percentage = a.split("/")[1] + "%";
@@ -89,6 +91,7 @@ function updateDiscount(){
 
 	$.ajax({
   		url: "<%= url_for :controller => :order, :action => :next_discount, :id => @order.id %>",
+  		error: function(){setTimeout(updateDiscount,2000);}
 		}).done(function(a) { 
   			$("#next-discount").html(a);
   			setTimeout(updateDiscount,2000);
