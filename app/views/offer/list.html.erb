@@ -4,7 +4,6 @@
 	</header>
 	<section id="offers">
 		<% @offers.each_with_index { |offer, index| %>
-
 			<% if index%2 == 0 %>
 
 				<div class="row show-grid">
@@ -13,7 +12,7 @@
 
 			<div class="span6 well">
 
-				<%= offer.title %>
+				<a href='<%= url_for :controller => :order, :action => :new, :id => offer.id %>'><%= offer.title %></li>
 
 			</div>
 

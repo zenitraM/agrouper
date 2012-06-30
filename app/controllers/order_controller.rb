@@ -15,6 +15,9 @@ class OrderController < ApplicationController
   end
 
   def control
+  	order_id = params[:id]
+  	@order = Order.find(order_id)
+  	
   end
 
   def choose

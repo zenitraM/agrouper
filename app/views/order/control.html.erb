@@ -1,2 +1,3 @@
-<h1>Order#control</h1>
-<p>Find me in app/views/order/control.html.erb</p>
+<h1>Order control</h1>
+<p>Order ID: <%= @order.id %></p>
+QR Code: <img src="http://chart.apis.google.com/chart?cht=qr&chs=300x300&chl=<%= url_for :action => :join, :id => @order.id, :only_path => false %>">
