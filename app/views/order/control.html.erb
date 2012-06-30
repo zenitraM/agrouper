@@ -26,6 +26,7 @@
 					</li>
 				<% } %>
 				<p>Order total: <%= @order.get_total %></p>
+				<p>Descuento: <%= @order.calculate_order_discount * 100 %>%</p>
 			</div>
 		</div>
 	</div>

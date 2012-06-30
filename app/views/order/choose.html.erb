@@ -1,11 +1,29 @@
 <h1>Haz tu pedido, <%= @user.username %></h1>
 <hr><%= @user.get_count %> productos en tu pedido:</hr>
-<ul>
+<table class="table table-striped table-bordered"><thead><tr><th>Cantidad</th><th>Producto</th><th>Precio</th></tr>
 			<% @user.items.each { |i|%> 
-				<li><%= i.product.title %> - <%= i.product.price %>€ * <%= i.quantity %> = <%= i.get_total %>€</li>
-			<% }%></ul>
+			<tr>
+				<td><a href="<%= url_for :action => :add, :id => @order.id, :product_id => i.product.id, :quantity => 1, :only_path => false %>">
+					<i class="icon-plus"></i>
+				</a> <%= i.quantity %> <a href="<%= url_for :action => :add, :id => @order.id, :product_id => i.product.id, :quantity => -1, :only_path => false %>"><i class="icon-minus"></i></a>
+				</td>
+				<td><%= i.product.title %></td>
+				<td><%= i.get_total %>€</td>
+			<tr>
+			<% }%></table>
+			<p>Tu total: <%= @user.get_total %>€</p>
+			<p>Descuento: <%= discount = @user.order.calculate_order_discount; (discount * 100).round(2) %>%</p>
+			<p>Tu total con descuento: <b><%= (@user.get_total * (1-discount)).round(2) %>€</b></p>
 </ul>
 <hr>
-<% @order.offer.products.each do |product| %>
-<p></p> <a href="<%= url_for :action => :add, :id => @order.id, :product_id => product.id, :quantity => 1, :only_path => false %>"><%= product.title %></a>
+<h1>Añadir más productos:</h1>
+<% @order.offer.products.each_with_index do |product,idx| %>
+<% if idx%2 == 0 %>
+<div class="row">
+<% end %>
+<div class="well span5">
+	<h2><a href="<%= url_for :action => :add, :id => @order.id, :product_id => product.id, :quantity => 1, :only_path => false %>"><%= product.title %></a></h2><%= product.description %></div>
+<% if idx%2 == 1 %>
+</div>
+<% end %>
 <% end %>

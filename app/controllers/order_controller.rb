@@ -58,8 +58,13 @@ class OrderController < ApplicationController
 	else
 		item.quantity += quantity.to_i
 	end
-	item.save
-	item.product.save
+
+	if item.quantity == 0
+		item.delete
+	else
+		item.save
+		item.product.save
+	end
 
   	redirect_to :action => :choose, :id => order.id
   end
