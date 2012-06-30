@@ -1,4 +1,11 @@
-<h1>Haz tu pedido, <%= User.find(session[:user_id]).username %></h1>
+<h1>Haz tu pedido, <%= @user.username %></h1>
+<hr><%= @user.get_count %> productos en tu pedido:</hr>
+<ul>
+			<% @user.items.each { |i|%> 
+				<li><%= i.product.title %> - <%= i.product.price %>€ * <%= i.quantity %> = <%= i.get_total %>€</li>
+			<% }%></ul>
+</ul>
+<hr>
 <% @order.offer.products.each do |product| %>
-<p><%= product.title %></p> <%= url_for :action => :add, :id => @order.object_id, :product_name => product.object_id, :quantity => 1, :only_path => false %>
+<p></p> <a href="<%= url_for :action => :add, :id => @order.id, :product_id => product.id, :quantity => 1, :only_path => false %>"><%= product.title %></a>
 <% end %>

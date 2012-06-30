@@ -1,7 +1,7 @@
 class Product
   include Mongoid::Document
   belongs_to :offer
-  belongs_to :item
+  has_many :item
   field :title, type: String
   field :description, type: String
   field :price, type: Float

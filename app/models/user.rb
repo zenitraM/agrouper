@@ -9,4 +9,8 @@ class User
   def get_total
   	self.items.to_a.sum {|u| u.get_total }
   end
+
+  def get_count
+  	self.items.to_a.sum {|u| u.quantity }
+  end
  end

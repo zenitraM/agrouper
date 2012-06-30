@@ -9,7 +9,7 @@ Grouponer::Application.routes.draw do
 
   get "order/choose/:id" => "order#choose"
 
-  get "order/add/:id/:product_name/:quantity" => "order#add"
+  get "order/add/:id/:product_id/:quantity" => "order#add"
 
   get "offer/list"
 

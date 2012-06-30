@@ -1,6 +1,6 @@
 class Item
   include Mongoid::Document
-  has_one :product
+  belongs_to :product
 
   field :quantity, type: Integer
 

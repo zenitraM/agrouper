@@ -35,6 +35,8 @@ class OrderController < ApplicationController
   def choose
 	order_id = params[:id]
 	@order = Order.find(order_id)
+	@user = User.find(session[:user_id])
+
   end
 
   def add
@@ -45,11 +47,21 @@ class OrderController < ApplicationController
 
 	order = Order.find(order_id)
 	user = order.users.find(user_id)
-	product = order.offer.product.find(product_id)
-	item = user.item.new
-	item.product = product
-	item.quantity = quantity
+
+	product = order.offer.products.find(product_id)
+
+	item = user.items.where(:product_id => product_id).first
+	if item == nil
+		item = user.items.new
+		item.quantity = 1
+		item.product = product
+	else
+		item.quantity += quantity.to_i
+	end
 	item.save
+	item.product.save
+
+  	redirect_to :action => :choose, :id => order.id
   end
 
 end
