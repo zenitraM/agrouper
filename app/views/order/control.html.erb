@@ -1,14 +1,32 @@
-<h1>Order control</h1>
-<p>Order ID: <%= @order.id %></p>
-<ul>
-<% @order.users.each { |u| %>
-	<li><b><%= u.username %>: <%= u.get_total %>€</b>
-		<ul>
-			<% u.items.each { |i|%> 
-				<li><%= i.product.title %> - <%= i.product.price %>€ * <%= i.quantity %> = <%= i.get_total %>€</li>
-			<% }%></ul>
-	</li>
-<% } %>
 
-<p>Order total: <%= @order.get_total %></p>
-QR Code: <img src="http://chart.apis.google.com/chart?cht=qr&chs=300x300&chl=<%= url_for :action => :join, :id => @order.id, :only_path => false %>">
+<header id="title">
+	<h1>Oferta: <%= @order.offer.title %></h1>
+</header>
+<section>
+	<div class="row show-grid">
+		<div class="span4 pagination-centered">
+			<div class="well">
+				<h2>Apúntate</h2><br>
+				<img src="http://chart.apis.google.com/chart?cht=qr&chs=300x300&chl=<%= url_for :action => :join, :id => @order.id, :only_path => false %>"><br>
+				<div class="friendly-url">
+					<div class="well">
+						http://www.agrouper.com/hola
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="span8">
+			<div class="well">
+				<% @order.users.each { |u| %>
+					<li><b><%= u.username %>: <%= u.get_total %>€</b>
+						<ul>
+							<% u.items.each { |i|%> 
+								<li><%= i.product.title %> - <%= i.product.price %>€ * <%= i.quantity %> = <%= i.get_total %>€</li>
+							<% }%></ul>
+					</li>
+				<% } %>
+				<p>Order total: <%= @order.get_total %></p>
+			</div>
+		</div>
+	</div>
+</section>
