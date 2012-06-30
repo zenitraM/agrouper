@@ -10,11 +10,11 @@ test:
 
 # set these environment variables on your prod server
 production:
-  host: 198.245.51.73
+  host: 127.0.0.1
   port: 27018
   #username: <%= ENV['MONGOID_USERNAME'] %>
   #password: <%= ENV['MONGOID_PASSWORD'] %>
-  database: grouponer_prod
+  database: grouponer_development
   # slaves:
   #   - host: slave1.local
   #     port: 27018
