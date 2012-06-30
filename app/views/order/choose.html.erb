@@ -44,7 +44,7 @@ Para conseguir un <b><%= (@discount_id[:next][:percentage]*100) %>%</b> de descu
 <div class="row">
 <% end %>
 <div class="well span5">
-	<h2><a href="<%= url_for :action => :add, :id => @order.id, :product_id => product.id, :quantity => 1, :only_path => false %>"><%= product.title %></a></h2><%= product.description %></div>
+	<h2><a href="<%= url_for :action => :add, :id => @order.id, :product_id => product.id, :quantity => 1, :only_path => false %>"><%= product.title %> - de <%= product.price %>€ a <%= ((product.price)*(1-@order.offer.get_discounts.last[:percentage])).round(2) %>€</a></h2><%= product.description %></div>
 <% if idx%2 == 1 %>
 </div>
 <% end %>

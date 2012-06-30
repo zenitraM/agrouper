@@ -57,11 +57,24 @@ class OrderController < ApplicationController
     params[:id] = nil
     return redirect_to '/'
   end
-  if params["ajax"] == "1"
-    return render :layout => false
-  else
-    render
+
+  if @order.closed == true
+    return render:template => "order/pay_paypal", :layout => false
   end
+  
+    if params["ajax"] == "1"
+      return render :layout => false
+    else
+      render
+    end
+  end
+
+
+  def checkout
+    order_id = params[:id]
+    @order = Order.find(order_id)
+    #@order.closed = true
+    @order.save
   end
 
   def add

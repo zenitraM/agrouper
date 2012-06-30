@@ -6,7 +6,7 @@
 					<b><%= u.username %></b>
 				</div>
 				<div class="" style="float:left; margin-top: 5px; width: 10%">
-					<b><%= u.get_total %> €</b>
+					<b><%= (u.get_total * (1-@order.calculate_order_discount)).round(2)  %> €</b>
 				</div>
 				<div style="float:left; width: 10%">
 					<a class="btn btn-warning" href="<%= url_for :controller => :order, :action => :ban_user, :orderid => @order.id, :userid => u.id %>" > x </a>
