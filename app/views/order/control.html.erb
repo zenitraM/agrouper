@@ -16,52 +16,14 @@
 			</div>
 		</div>
 		<div class="span8">
-			<div class="well">
-				<ul>
-					<% @order.users.each { |u| %>
-						<li>
-							<div class="well white-well">
-								<div style="width: 80%; float:left;">
-									<b><%= u.username %></b>
-								</div>
-								<div class="" style="float:left; margin-top: 5px; width: 10%">
-									<b><%= u.get_total %> €</b>
-								</div>
-								<div style="float:left; width: 10%">
-									<a class="btn btn-warning"> x </a>
-								</div>
-								<div class="clear"></div>
-								<ul>
-									<hr>
-									<% u.items.each { |i|%> 
-										<li>
-											<div style="width: 70%; float: left;">
-												<%= i.product.title %>
-											</div>
-											<div style="width: 10%; float: left;">
-												<%= i.product.price %>€ 
-											</div >
-											<div style="width: 10%; float: left;">
-												<%= i.quantity %>
-											</div>
-											<div style="width: 10%; float: left;">
-												<%= i.get_total %>€
-											</div>
-											<div class="clear"></div>
-										</li>
-										<hr>
-									<% }%>
-								</ul>
-							</div>
-						</li>
-					<% } %>
-				</ul>
+			<div class="well" id="updated_list">
+				<%= render :template => "order/updated_list" %>
 			</div>
 		</div>
 		<div class="row">
 			<div class="span5">
 				<div class="progress progress-striped progress-success active">
-			    	<div class="bar" style="width: <%= @order.calculate_order_discount*100 %>%;"></div>
+			    	<div class="bar" style="width: <%= @order.calculate_order_discount*100 / @order.offer.get_discounts.last[:lower_limit] %>%;"></div>
 			    </div>
 			</div>
 			<div class="span3 pagination-right">
@@ -71,5 +33,23 @@
 				</div>
 				<div class="clear"></div>
 			</div>
+		</div>
 	</div>
 </section>
+
+<script>
+
+function updateList(){
+
+	$.ajax({
+  		url: "<%= url_for :controller => :order, :action => :updated_list, :id => @order.id %>",
+		}).done(function(a) { 
+  			$("#updated_list").html(a);
+  			setTimeout(updateList,2000);
+		});
+
+}
+
+setTimeout(updateList,2000);
+
+</script>
